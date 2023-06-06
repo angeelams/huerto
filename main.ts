@@ -1,10 +1,14 @@
-basic.forever(function () {
+let conductividad = 0
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    basic.showString("iluminación")
+    basic.showNumber(input.lightLevel())
+})
+input.onButtonPressed(Button.A, function () {
     basic.showString("temperatura")
-    basic.showNumber(Environment.dht11value(Environment.DHT11Type.DHT11_temperature_C, DigitalPin.P1))
+    basic.showNumber(input.temperature())
+})
+input.onButtonPressed(Button.B, function () {
     basic.showString("humedad")
-    basic.showNumber(Environment.dht11value(Environment.DHT11Type.DHT11_humidity, DigitalPin.P1))
-    basic.pause(2000)
-    if (Environment.dht11value(Environment.DHT11Type.DHT11_temperature_C, DigitalPin.P1) >= 25) {
-        music.playMelody("C5 B A G F E D C ", 120)
-    }
+    conductividad = pins.analogReadPin(AnalogPin.P0)
+    basic.showNumber(conductividad)
 })
